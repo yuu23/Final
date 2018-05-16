@@ -1,7 +1,6 @@
 package f.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import f.bean.fCharacterBean;
 import f.dao.FinalDao2;
+import f.dao.fDAOException;
 
 @WebServlet("/FinalServlet")
 public class FinalServlet extends HttpServlet {
@@ -19,16 +20,66 @@ public class FinalServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = response.getWriter();
+		request.setCharacterEncoding("UTF-8");
 
-		out.println("あああ");
+		try {
+			// パラメータの解析
+			String action = request.getParameter("action");
+			// モデルのDAOを生成
+			FinalDao2 dao2 = new FinalDao2(); // DBへの接続
+			// パラメータなしの場合は全レコード表示
+			if(action == null || action.length() == 0) {
+				List<fCharacterBean> list2 = dao2.findAll();
+				// Listをリクエストスコープに入れてJSPへフォワードする
+				request.setAttribute("characterList", list2);
+				gotoPage(request,response,"/fCharacterList.jsp");
 
-		FinalDao2 dao2 = new FinalDao2();
-		List<String> list2 = dao2.findAll();
 
-		out.println( list2.get(2) );
+			// add
+			}else if(action.equals("add")) {
+				String no = request.getParameter("no");
+				String name = request.getParameter("name");
+				String job = request.getParameter("job");
+				String ability = request.getParameter("ability");
+				String image = request.getParameter("image");
 
+				dao2.fAddCharacter(no,name,job,ability,image);
+				// 追加後、全レコード表示
+				List<fCharacterBean> list2 = dao2.findAll();
+				// Listをリクエストスコープに入れてJSPへフォワードする
+				request.setAttribute("characterList", list2);
+				gotoPage(request,response,"/fCharacterList.jsp");
+			}
+
+			// delete
+				else if(action.equals("delete")) {
+					int no = Integer.parseInt(request.getParameter("no"));
+					dao2.deleteByPrimaryKey(no);
+					// 削除後、全レコードを表示
+					List<fCharacterBean> list2 = dao2.findAll();
+					// Listをリクエストスコープに入れてJSPへフォワードする
+					request.setAttribute("characterList", list2);
+					gotoPage(request,response,"/fCharacterList.jsp");
+
+
+			}else {
+				request.setAttribute("message","正しく操作してください");
+				gotoPage(request,response,"/errInternal.jsp");
+	}
+		}catch (fDAOException e) {
+		e.printStackTrace();
+		request.setAttribute("message", "内部エラーが発生しました");
+		gotoPage(request,response,"/fErrInput.jsp");
+	}
+}
+//
+//		out.println("あああ");
+//
+//		FinalDao2 dao2 = new FinalDao2();
+//		List<String> list2 = dao2.findAll();
+//
+//		out.println( list2.get(2) );
+//
 //		request.setAttribute("characterList", list2);
 //		gotoPage(request,response,"/fCharacterList.jsp");
 //
@@ -81,7 +132,6 @@ public class FinalServlet extends HttpServlet {
 //		}
 //		out.println("<a href='/Final/fLogin.jsp'>戻る</a>");
 //		out.println("</body></html>");
-	}
 
 	protected void gotoPage(HttpServletRequest request,
 			HttpServletResponse response,String page) throws ServletException,

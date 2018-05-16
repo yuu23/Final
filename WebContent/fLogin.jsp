@@ -7,7 +7,7 @@
 <title>Login page</title>
 </head>
 <body>
-	<form action="/Final/FinalServlet" method="post">
+	<form action="/Final/fLoginServlet" method="post">
 		ユーザー名:<input type="text" name="userId" /><br />
 		パスワード:<input type="password" name="pw" /><br />
 		<input type="hidden" name="action" value="login" />
