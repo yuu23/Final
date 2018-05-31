@@ -1,0 +1,8 @@
+a {color: #00FA9A;
+  text-decoration: none;
+  }
+
+a:hover {
+  color: white;
+  font-weight: bold
+  }

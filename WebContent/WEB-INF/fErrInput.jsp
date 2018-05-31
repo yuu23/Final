@@ -3,13 +3,13 @@
 <% request.getAttribute("message"); %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fError</title>
-</head>
-<body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>fError</title>
+	</head>
+	<body>
 
-${message}
+		${message}
 
-</body>
+	</body>
 </html>

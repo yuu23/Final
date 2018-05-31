@@ -1,0 +1,31 @@
+input#cp_btn {
+	width: 160px;
+	padding: 0.8em;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: 0 0 5px rgba(255, 255, 255, 0.0);
+	background: #1A237E;
+	transition: .4s;
+	border-radius: 4px;
+	}
+
+input#cp_btn:hover {
+	text-shadow: -6px 0px 15px rgba(255, 255, 240, 0.83), 6px 0px 15px rgba(255, 255, 240, 0.83);
+	transition: .4s;
+	}
+
+h1,
+.f1{
+
+	display: inline-block;
+
+}
+
+h1,
+.f2{
+
+	display: inline-block;
+
+}

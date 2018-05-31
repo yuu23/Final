@@ -37,7 +37,6 @@ public class fLoginServlet extends HttpServlet {
 
 			String dbUserId = null;
 			String dbPw = null;
-
 			dbUserId = list.get(0);
 			dbPw = list.get(1);
 
@@ -45,12 +44,17 @@ public class fLoginServlet extends HttpServlet {
 				// セッション情報を生成
 				HttpSession session = request.getSession();
 				// ログイン済みの属性を設定
-				session.setAttribute("isLogin", "true");
-				RequestDispatcher rd = request.getRequestDispatcher("/fMypage.jsp"); // fMypage.jspにフォワード
+				session.setAttribute("name", userId);
+				session.setAttribute("loginUser", list);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/fMypage.jsp"); // fMypage.jspにフォワード
 				rd.forward(request,response);
 			} else{
-				RequestDispatcher rd = request.getRequestDispatcher("/fLogin.jsp"); // fLogin.jspにフォワード
-				rd.forward(request,response);
+				out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/Final/css/background6.css\">");
+				out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"/Final/css/alphabetColor.css\">");
+				out.println("<title>Login failed</title></head><body>");
+				out.println("<h1>Login failed.</h1>");
+				out.println("<h3>※ユーザー名、またはパスワードが間違っている可能性があります。</h3><br/><br/>");
+				out.println("</body></html>");
 			}
 		} else if(action.equals("logout")){ // ログアウト時
 			// すでに作成されているセッション領域を取得。新しくは作成しない
@@ -58,11 +62,13 @@ public class fLoginServlet extends HttpServlet {
 			if(session != null) {
 				// セッション領域を無効
 				session.invalidate();
-				out.println("<html><head><title>ShowCart</title></head><body>");
-				out.println("<h1>ログアウトしました</h1>");
+				out.println("<html><head><link rel=\"stylesheet\" type=\"text/css\" href=\"/Final/css/alphabetColor.css\">");
+				out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"/Final/css/background6.css\">");
+				out.println("<title>Logout</title></head><body>");
+				out.println("<h1>Log out complete.</h1><br/><br/>");
 			}
 		}
-		out.println("<a href='/Final/fLogin.jsp'>戻る</a>");
+			out.println("<a href='/Final/fLogin.jsp'>Login page</a>");
 		out.println("</body></html>");
 	}
 

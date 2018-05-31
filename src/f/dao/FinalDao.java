@@ -14,7 +14,7 @@ public class FinalDao {
 			ResultSet rs = null;
 
 		try {
-			// 2.DBから名前とパス取得
+			// DBからuser_idとpassを取得
 				Class.forName("com.mysql.jdbc.Driver");
 
 				String url = "jdbc:mysql://localhost/final?serverTimezone=UTC&useSSL=false";

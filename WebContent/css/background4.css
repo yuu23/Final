@@ -1,0 +1,10 @@
+body {
+	/* 背景 */
+	background-image: url("/Final/img/3184796744-adventure_fantasy_art_landscapes_path_trail_people_flowers_lamps_fire_decay_ruins_trees_forest_1951x1080-jR8R-1366x768-MM-100.jpg") ;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	/* 文字 */
+    color: white;
+	}

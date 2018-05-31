@@ -1,0 +1,10 @@
+body {
+	/* 背景 */
+	background-image: url("/Final/img/Painting_Art_Temples_439070_1366x768.jpg") ;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+
+	/* 文字 */
+    color: white;
+	}
